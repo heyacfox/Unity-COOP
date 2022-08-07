@@ -28,8 +28,9 @@ public class LaunchObjectTowardsMouse : MonoBehaviour
             instantiatedRigidbody = instantiatedObject.AddComponent<Rigidbody2D>();
         }
         instantiatedRigidbody.gravityScale = 0;
-        Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 mouseWorldDirection = mouseWorldPosition.normalized;
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 relativeMousePosition = mouseWorldPosition - launchPosition.position;
+        Vector2 mouseWorldDirection = relativeMousePosition.normalized;
 
         instantiatedRigidbody.AddForce(launchForce * defaultMultiplier * mouseWorldDirection);
     }
